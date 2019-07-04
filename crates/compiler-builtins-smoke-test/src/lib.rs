@@ -9,5 +9,5 @@
     feature(core_intrinsics)
 )]
 
-#[path = "../../../src/math/mod.rs"]
+#[path = "../../libm/src/math/mod.rs"]
 mod libm;
