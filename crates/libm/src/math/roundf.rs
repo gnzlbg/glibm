@@ -32,14 +32,3 @@ pub fn roundf(mut x: f32) -> f32 {
         y
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use crate::*;
-
-    #[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
-    #[cfg_attr(not(target_arch = "wasm32"), test)]
-    fn negative_zero() {
-        assert_eq!(roundf(-0.0_f32).to_bits(), (-0.0_f32).to_bits());
-    }
-}

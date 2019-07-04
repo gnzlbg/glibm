@@ -356,19 +356,3 @@ fn qonef(x: f32) -> f32 {
     s = 1.0 + z * (q[0] + z * (q[1] + z * (q[2] + z * (q[3] + z * (q[4] + z * q[5])))));
     return (0.375 + r / s) / x;
 }
-
-#[cfg(test)]
-mod tests {
-    use crate::*;
-    #[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
-    #[cfg_attr(not(target_arch = "wasm32"), test)]
-    fn test_j1f_2488() {
-        // 0x401F3E49
-        assert_eq!(j1f(2.4881766_f32), 0.49999475_f32);
-    }
-    #[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
-    #[cfg_attr(not(target_arch = "wasm32"), test)]
-    fn test_y1f_2002() {
-        assert_eq!(y1f(2.0000002_f32), -0.10703229_f32);
-    }
-}

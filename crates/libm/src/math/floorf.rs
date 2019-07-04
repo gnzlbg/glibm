@@ -39,13 +39,3 @@ pub fn floorf(x: f32) -> f32 {
     }
     f32::from_bits(ui)
 }
-
-#[cfg(test)]
-mod tests {
-    use crate::*;
-    #[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
-    #[cfg_attr(not(target_arch = "wasm32"), test)]
-    fn no_overflow() {
-        assert_eq!(floorf(0.5), 0.0);
-    }
-}

@@ -134,13 +134,3 @@ pub fn expm1(mut x: f64) -> f64 {
     }
     y
 }
-
-#[cfg(test)]
-mod tests {
-    use crate::*;
-    #[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
-    #[cfg_attr(not(target_arch = "wasm32"), test)]
-    fn sanity_check() {
-        assert_eq!(expm1(1.1), 2.0041660239464334);
-    }
-}

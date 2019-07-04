@@ -30,13 +30,3 @@ pub fn truncf(x: f32) -> f32 {
     i &= !m;
     f32::from_bits(i)
 }
-
-#[cfg(test)]
-mod tests {
-    use crate::*;
-    #[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
-    #[cfg_attr(not(target_arch = "wasm32"), test)]
-    fn sanity_check() {
-        assert_eq!(truncf(1.1), 1.0);
-    }
-}
