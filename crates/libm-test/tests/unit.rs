@@ -6,6 +6,7 @@ extern crate wasm_bindgen_test;
 use wasm_bindgen_test::wasm_bindgen_test;
 
 use libm::*;
+use libm_test::assert_approx_eq;
 
 #[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
 #[cfg_attr(not(target_arch = "wasm32"), test)]
@@ -381,14 +382,19 @@ fn y1f_2002() {
 fn fma_segfault_bug() {
     // An attempt to substract with overflow was causing a segfault
     // on FMA for these inputs:
-    assert_eq!(
+    assert_approx_eq!(
         fma(
             -0.0000000000000002220446049250313,
             -0.0000000000000002220446049250313,
             -0.0000000000000002220446049250313
         ),
-        -0.00000000000000022204460492503126
+        -0.00000000000000022204460492503126,
+        ulp: 0
     );
 
-    assert_eq!(fma(-0.992, -0.992, -0.992), -0.00793599999988632);
+    assert_approx_eq!(
+        fma(-0.992, -0.992, -0.992),
+        -0.00793599999988632,
+        ulp: 0
+    );
 }
