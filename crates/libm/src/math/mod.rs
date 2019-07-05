@@ -1,5 +1,6 @@
 macro_rules! force_eval {
     ($e:expr) => {
+        #[allow(unused_unsafe)]
         unsafe {
             ::core::ptr::read_volatile(&$e);
         }
