@@ -1,5 +1,5 @@
-trigger:
-  - master
+trigger: ["dev"]
+pr: ["dev"]
 
 jobs:
   - job: Docker
@@ -27,21 +27,16 @@ jobs:
           TARGET: i686-unknown-linux-gnu
         mips:
           TARGET: mips-unknown-linux-gnu
-        mips64:
-          TARGET: mips64-unknown-linux-gnuabi64
         mips64el:
           TARGET: mips64el-unknown-linux-gnuabi64
-        powerpc:
-          TARGET: powerpc-unknown-linux-gnu
-        powerpc64:
-          TARGET: powerpc64-unknown-linux-gnu
         powerpc64le:
           TARGET: powerpc64le-unknown-linux-gnu
-        x86_64:
-          TARGET: x86_64-unknown-linux-gnu
         wasm32:
           TARGET: wasm32-unknown-unknown
-          TOOLCHAIN: nightly
+        x86_64:
+          TARGET: x86_64-unknown-linux-gnu
+    variables:
+      TOOLCHAIN: nightly
 
   - job: tools
     pool:
@@ -56,22 +51,7 @@ jobs:
         displayName: "install clippy"
       - bash: cargo clippy --all -- -D clippy::pedantic
         displayName: "check clippy"
-
-  - job: compiler_builtins_works
-    pool:
-      vmImage: ubuntu-16.04
-    steps:
-      - template: ci/azure-install-rust.yml
       - bash: cargo build -p cb
         displayName: "Check compiler-builtins still probably builds"
-
-  - job: benchmarks
-    pool:
-      vmImage: ubuntu-16.04
-    steps:
-      - template: ci/azure-install-rust.yml
       - bash: cargo bench --all
         displayName: "Benchmarks"
-    variables:
-      TOOLCHAIN: nightly
-
